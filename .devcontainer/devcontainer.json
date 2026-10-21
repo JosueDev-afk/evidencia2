@@ -1,0 +1,36 @@
+{
+  "name": "LSTI2001 · Evidencia final — Biblioteca",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+
+  // --- Ajustes necesarios para Podman rootless en macOS ---
+  "runArgs": [
+    "--userns=keep-id:uid=1000,gid=1000",
+    "--security-opt=label=disable",
+    "--name=biblioteca-dev"
+  ],
+  "containerUser": "vscode",
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": false,
+
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,Z",
+
+  "containerEnv": {
+    "JAVA_HOME": "/opt/java/openjdk",
+    "CLASSPATH": "."
+  },
+
+  // Se ejecuta al crear el contenedor: comprueba la instalación del JDK
+  "postCreateCommand": "java -version && javac -version",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  }
+}

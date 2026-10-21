@@ -1,0 +1,32 @@
+# ---- Archivos compilados de Java ----
+*.class
+out/
+target/
+
+# ---- Archivos temporales de editores ----
+*.swp
+*.swo
+*~
+
+# ---- Archivos de proyecto del IDE ----
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+# Eclipse
+.classpath
+.project
+.settings/
+# NetBeans
+nbproject/
+# Visual Studio Code
+.vscode/
+
+# ---- Logs generados en tiempo de ejecución ----
+logs/*.log
+logs/*.log.gz
+
+# ---- Sistema operativo ----
+.DS_Store
+Thumbs.db
