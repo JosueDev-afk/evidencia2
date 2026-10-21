@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LSTI2001 — Evidencia final
+  Configuración de Log4J2: la actividad en consola y el detalle en logs/.
+-->
+<Configuration status="WARN">
+
+  <Properties>
+    <Property name="patron">%d{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{1} - %msg%n</Property>
+  </Properties>
+
+  <Appenders>
+    <!-- Solo advertencias y errores llegan a la consola -->
+    <Console name="Consola" target="SYSTEM_ERR">
+      <PatternLayout pattern="${patron}"/>
+      <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+    </Console>
+
+    <!-- El detalle completo se guarda en el archivo -->
+    <RollingFile name="Archivo"
+                 fileName="logs/biblioteca.log"
+                 filePattern="logs/biblioteca-%d{yyyy-MM-dd}.log.gz">
+      <PatternLayout pattern="${patron}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="5 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="10"/>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Root level="INFO">
+      <AppenderRef ref="Consola"/>
+      <AppenderRef ref="Archivo"/>
+    </Root>
+  </Loggers>
+
+</Configuration>
