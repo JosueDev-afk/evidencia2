@@ -21,8 +21,8 @@ dependencias están versionadas dentro del repositorio.
 ## Instalación
 
 ```bash
-git clone https://github.com/JosueDev-afk/biblioteca.git
-cd biblioteca
+git clone https://github.com/JosueDev-afk/evidencia2.git
+cd evidencia2
 ./compilar.sh
 ```
 
