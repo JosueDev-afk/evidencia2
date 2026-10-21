@@ -1,0 +1,101 @@
+================================================================================
+ LSTI2001 — Evidencia final
+ Pseudocódigo del programa que administra los libros de una biblioteca
+================================================================================
+
+--------------------------------------------------------------------------------
+ CLASE Libro
+--------------------------------------------------------------------------------
+Clase Libro
+
+    // Atributos
+    Definir titulo          Como Cadena
+    Definir autor           Como Cadena
+    Definir anioPublicacion Como Entero
+
+    // Constructor: recibe los tres datos del ejemplar
+    Metodo Libro(titulo, autor, anioPublicacion)
+        this.titulo          <- titulo
+        this.autor           <- autor
+        this.anioPublicacion <- anioPublicacion
+    FinMetodo
+
+    // Devuelve el libro con formato de una sola línea
+    Metodo toString() Devuelve Cadena
+        Retornar titulo + "  " + autor + "  " + anioPublicacion
+    FinMetodo
+
+FinClase
+
+
+--------------------------------------------------------------------------------
+ CLASE Biblioteca
+--------------------------------------------------------------------------------
+Clase Biblioteca
+
+    // Atributos
+    Definir libros   Como Arreglo de Libro
+    Definir cantidad Como Entero
+
+    // Constructor: reserva el arreglo del tamaño indicado
+    Metodo Biblioteca(capacidad)
+        libros   <- nuevo Arreglo de Libro[capacidad]
+        cantidad <- 0
+    FinMetodo
+
+    // Agrega un libro al arreglo. Devuelve si la operación tuvo éxito.
+    Metodo agregarLibro(libro) Devuelve Logico
+
+        Si cantidad >= longitud(libros) Entonces
+            Escribir "La biblioteca está llena. No se pudo agregar: " + libro.titulo
+            Retornar Falso
+        FinSi
+
+        libros[cantidad] <- libro
+        cantidad         <- cantidad + 1
+        Retornar Verdadero
+
+    FinMetodo
+
+    // Muestra en pantalla todos los libros registrados
+    Metodo mostrarLibros()
+
+        Escribir "===== ACERVO DE LA BIBLIOTECA ====="
+
+        Si cantidad = 0 Entonces
+            Escribir "Todavía no hay libros registrados."
+            Retornar
+        FinSi
+
+        Escribir "#", "TÍTULO", "AUTOR", "AÑO"
+
+        Para i <- 0 Hasta cantidad - 1 Hacer
+            Escribir (i + 1), libros[i]
+        FinPara
+
+        Escribir "Total de libros: ", cantidad, " de ", longitud(libros)
+
+    FinMetodo
+
+FinClase
+
+
+--------------------------------------------------------------------------------
+ PROGRAMA PRINCIPAL
+--------------------------------------------------------------------------------
+Algoritmo Main
+
+    // Se crea una instancia de la biblioteca
+    Definir biblioteca Como Biblioteca
+    biblioteca <- nueva Biblioteca(10)
+
+    // Se agregan cuatro libros
+    biblioteca.agregarLibro(nuevo Libro("Cien años de soledad",    "Gabriel García Márquez", 1967))
+    biblioteca.agregarLibro(nuevo Libro("El llano en llamas",      "Juan Rulfo",             1953))
+    biblioteca.agregarLibro(nuevo Libro("La casa de los espíritus","Isabel Allende",         1982))
+    biblioteca.agregarLibro(nuevo Libro("Rayuela",                 "Julio Cortázar",         1963))
+
+    // Se muestran todos los libros de la biblioteca
+    biblioteca.mostrarLibros()
+
+FinAlgoritmo
